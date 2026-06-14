@@ -1,0 +1,83 @@
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">✦</span>
+        <span class="brand-name">TaskFlow</span>
+      </div>
+      <p class="header-sub">Stay organised, stay ahead.</p>
+    </div>
+  </header>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">{{ stats.total }}</span>
+      <span class="stat-label">Total</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num pending-num">{{ stats.pending }}</span>
+      <span class="stat-label">Pending</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num progress-num">{{ stats.inProgress }}</span>
+      <span class="stat-label">In Progress</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num done-num">{{ stats.completed }}</span>
+      <span class="stat-label">Done</span>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- Form -->
+    <section class="form-section">
+      <app-task-form
+        [editTask]="editingTask"
+        (submitted)="onSubmit($event)"
+        (cancelled)="onCancelEdit()"
+      ></app-task-form>
+    </section>
+
+    <!-- Toast messages -->
+    <div class="toast success-toast" *ngIf="successMsg">{{ successMsg }}</div>
+    <div class="toast error-toast" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+    <!-- Task list section -->
+    <section class="list-section">
+      <div class="list-header">
+        <h2 class="list-title">Tasks</h2>
+        <app-task-filter (filterChanged)="onFilterChange($event)"></app-task-filter>
+      </div>
+
+      <!-- Loading -->
+      <div class="empty-state" *ngIf="loading">
+        <div class="spinner"></div>
+        <p>Loading tasks…</p>
+      </div>
+
+      <!-- Empty -->
+      <div class="empty-state" *ngIf="!loading && filteredTasks.length === 0">
+        <span class="empty-icon">🗂️</span>
+        <p>No tasks here. Add one above!</p>
+      </div>
+
+      <!-- Grid -->
+      <div class="task-grid" *ngIf="!loading && filteredTasks.length > 0">
+        <app-task-card
+          *ngFor="let task of filteredTasks; trackBy: trackById"
+          [task]="task"
+          (edit)="onEdit($event)"
+          (delete)="onDelete($event)"
+        ></app-task-card>
+      </div>
+    </section>
+
+  </main>
+</div>

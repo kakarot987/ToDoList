@@ -1,0 +1,56 @@
+<div class="form-card">
+  <h2 class="form-title">{{ isEditing ? 'Edit Task' : 'New Task' }}</h2>
+
+  <div class="form-grid">
+    <div class="field full-width">
+      <label class="field-label" for="taskName">Task Name <span class="required">*</span></label>
+      <input
+        id="taskName"
+        class="input"
+        type="text"
+        placeholder="What needs to be done?"
+        [(ngModel)]="form.taskName"
+        name="taskName"
+      />
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="label">Label</label>
+      <input
+        id="label"
+        class="input"
+        type="text"
+        placeholder="e.g. Work, Personal"
+        [(ngModel)]="form.label"
+        name="label"
+      />
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="status">Status</label>
+      <select id="status" class="input select" [(ngModel)]="form.status" name="status">
+        <option *ngFor="let s of statuses" [value]="s">{{ s | titlecase | replace }}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="dueDate">Due Date</label>
+      <input
+        id="dueDate"
+        class="input"
+        type="date"
+        [(ngModel)]="form.dueDate"
+        name="dueDate"
+      />
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn-secondary" type="button" *ngIf="isEditing" (click)="cancel()">
+      Cancel
+    </button>
+    <button class="btn-primary" type="button" (click)="submit()">
+      {{ isEditing ? 'Save Changes' : 'Add Task' }}
+    </button>
+  </div>
+</div>
