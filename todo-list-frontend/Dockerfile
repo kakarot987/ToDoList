@@ -1,5 +1,5 @@
 # ── Stage 1: Build Angular ──────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:22.22.3-alpine AS builder
 
 WORKDIR /app
 
