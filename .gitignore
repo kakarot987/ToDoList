@@ -2,3 +2,4 @@
 /todoList-spring-boot/build/
 /todoList-spring-boot/.gradle/
 .gradle/
+.env
