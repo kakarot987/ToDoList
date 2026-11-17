@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/todo-list-frontend"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      # Keep exact Angular peer versions aligned in a single npm lockfile update.
+      angular-framework:
+        applies-to: version-updates
+        patterns:
+          - "@angular/*"
+        update-types:
+          - "patch"
+          - "minor"
+      angular-security:
+        applies-to: security-updates
+        patterns:
+          - "@angular/*"
+  - package-ecosystem: "gradle"
+    directory: "/todoList-spring-boot"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
