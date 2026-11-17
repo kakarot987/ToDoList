@@ -1,6 +1,5 @@
 package com.ToDoList.Service;
 
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -16,6 +15,5 @@ public record ToDoRequest(
         @NotBlank
         String status,
 
-        @Future(message = "Due date must be in the future")
         LocalDate dueDate
 ) {}

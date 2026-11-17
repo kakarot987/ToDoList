@@ -40,6 +40,9 @@ public class ToDoService {
     }
 
     public void deleteTask(Long id) {
+        if (!toDoRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Task not found: " + id);
+        }
         toDoRepository.deleteById(id);
     }
 }
